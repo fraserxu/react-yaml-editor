@@ -1,14 +1,13 @@
 /**
  * @jsx React.DOM
  */
-
+var ReactForms = require('react-forms')
+var Form = ReactForms.Form
 var yamljs = require('yamljs')
 var React = require('react')
-var ReactForms = require('react-forms')
-var Schema = ReactForms.schema.Schema
-var Property = ReactForms.schema.Property
-var Form = ReactForms.Form
+var Utils = require('./utils')
 
+// Exprot the Yaml editor
 var YamlReader  = React.createClass({
 
   displayName: 'yamlEditor',
@@ -27,8 +26,8 @@ var YamlReader  = React.createClass({
 
   render: function() {
     var str = JSON.stringify(this.state.data, null, 4)
-    var properties = PropertyBuilder(this.state.data)
-    var schema = SchemaBuilder(properties)
+    var properties = Utils.PropertyBuilder(this.state.data)
+    var schema = Utils.SchemaBuilder(properties)
     return (
       <div>
 
@@ -47,49 +46,7 @@ var YamlReader  = React.createClass({
 
 })
 
-
-// text filed builder
-function TextField(name, value) {
-  return (
-    <Property
-    name={name}
-    label={name}
-    defaultValue={value}
-    input={<input type="text" />}
-    />
-  )
-}
-
-// property builder
-function PropertyBuilder(data) {
-  return Object.keys(data).map(function(key) {
-    if(typeof data[key] == 'string') {
-      return TextField(key, data[key])
-    } else if (typeof data[key] == 'object') {
-      var properties = PropertyBuilder(data[key])
-      return SubSchemaBuilder(properties, key)
-    }
-  })
-}
-
-// schema builder
-function SchemaBuilder(properties) {
-  return (
-    <Schema>
-      {properties}
-    </Schema>
-  )
-}
-
-// sub schema builder
-function SubSchemaBuilder(properties, name) {
-  return (
-    <Schema name={name} label={name} >
-      {properties}
-    </Schema>
-  )
-}
-
+// form builder
 var MyForm = React.createClass({
   render: function() {
 
