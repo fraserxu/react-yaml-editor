@@ -31,6 +31,9 @@ var YamlReader  = React.createClass({
     var schema = SchemaBuilder(properties)
     return (
       <div>
+
+        <h2>React Yaml editor</h2>
+
         <div className='code'>
           <pre>{str}</pre>
         </div>
@@ -47,7 +50,6 @@ var YamlReader  = React.createClass({
 
 // text filed builder
 function TextField(name, value) {
-  console.log('value', value)
   return (
     <Property
     name={name}
@@ -64,7 +66,8 @@ function PropertyBuilder(data) {
     if(typeof data[key] == 'string') {
       return TextField(key, data[key])
     } else if (typeof data[key] == 'object') {
-      // fieldSet
+      var properties = PropertyBuilder(data[key])
+      return SubSchemaBuilder(properties, key)
     }
   })
 }
@@ -73,6 +76,15 @@ function PropertyBuilder(data) {
 function SchemaBuilder(properties) {
   return (
     <Schema>
+      {properties}
+    </Schema>
+  )
+}
+
+// sub schema builder
+function SubSchemaBuilder(properties, name) {
+  return (
+    <Schema name={name} label={name} >
       {properties}
     </Schema>
   )
