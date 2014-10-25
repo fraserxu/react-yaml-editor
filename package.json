@@ -1,0 +1,22 @@
+{
+  "name": "react-yaml-editor",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build-js": "browserify main.js -t [ reactify --everything ] | uglifyjs -mc > bundle.js",
+    "watch-js": "watchify main.js -t [ reactify --everything ] -o bundle.js -dv",
+    "watch": "npm run watch-js"
+  },
+  "author": "fraserxu",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^0.11.2",
+    "react-forms": "^0.6.3",
+    "yamljs": "^0.2.1"
+  },
+  "devDependencies": {
+    "reactify": "^0.14.0",
+    "watchify": "^2.0.0"
+  }
+}

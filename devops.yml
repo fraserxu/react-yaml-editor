@@ -1,0 +1,12 @@
+name: Ghost
+description: Setting up two ghost blogs with devo.ps on **one** digitalocean box.
+image: https://cloud.githubusercontent.com/assets/1183541/4235989/00801dce-39c4-11e4-8548-9d3456f9d19f.png
+vars:
+  provider.name:
+    label: Cloud provider
+    default: digitalocean
+    description: The id of the provider you want to use, see http://docs.devo.ps/manual/nodes/#format
+  provider.size:
+    label: Server size
+    default: 66
+    description: Size of the server you will deploy your app on, see http://docs.devo.ps/providers/digitalocean/
