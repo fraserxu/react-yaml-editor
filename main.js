@@ -47,10 +47,12 @@ var YamlReader  = React.createClass({
 
 // text filed builder
 function TextField(name, value) {
+  console.log('value', value)
   return (
     <Property
     name={name}
     label={name}
+    defaultValue={value}
     input={<input type="text" />}
     />
   )
@@ -58,11 +60,12 @@ function TextField(name, value) {
 
 // property builder
 function PropertyBuilder(data) {
-  return Object.keys(data).map(function(value) {
-    if(typeof data[value] == 'string') {
-      return TextField(value, data[value])
+  return Object.keys(data).map(function(key) {
+    if(typeof data[key] == 'string') {
+      return TextField(key, data[key])
+    } else if (typeof data[key] == 'object') {
+      // fieldSet
     }
-    // TODO: recrusive build
   })
 }
 
